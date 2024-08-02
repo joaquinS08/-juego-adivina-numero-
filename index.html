@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el número</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Adivina el número secreto</h1>
+        <p>Intenta adivinar un número entre 1 y 10. Tienes 3 intentos.</p>
+        <input type="number" id="guessInput" min="1" max="10">
+        <button onclick="checkGuess()">Adivinar</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let secretNumber = Math.floor(Math.random() * 10) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            let guess = document.getElementById('guessInput').value;
+            attempts++;
+
+            if (guess == secretNumber) {
+                document.getElementById('message').innerHTML = "¡Felicidades! Has ganado. Te amo y extraño Melani";
+                document.getElementById('guessInput').disabled = true;
+            } else if (attempts >= 3) {
+                document.getElementById('message').innerHTML = "Se acabaron los intentos. El número era " + secretNumber;
+                document.getElementById('guessInput').disabled = true;
+            } else if (guess < secretNumber) {
+                document.getElementById('message').innerHTML = "El número es mayor. Te quedan " + (3 - attempts) + " intentos.";
+            } else {
+                document.getElementById('message').innerHTML = "El número es menor. Te quedan " + (3 - attempts) + " intentos.";
+            }
+        }
+    </script>
+</body>
+</html>
